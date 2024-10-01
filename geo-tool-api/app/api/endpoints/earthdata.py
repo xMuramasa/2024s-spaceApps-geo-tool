@@ -1,3 +1,4 @@
+import json
 import requests as r
 from fastapi import APIRouter, HTTPException
 
@@ -36,8 +37,7 @@ def search_products(search: SearchParams):
     products_dataframe = pd.DataFrame(prods)
 
     result = products_dataframe[
-        (products_dataframe['Available'] == True) &
-        (products_dataframe['Deleted'] == False) &
+        (products_dataframe['Available'] is True) & (products_dataframe['Deleted'] is False) &
         products_dataframe['Description'].str.contains(search.query_string)
     ]
 
@@ -78,6 +78,16 @@ def get_places():
     return list(nps['UNIT_NAME'])
 
 
+@router.get('/projections')
+def get_projections():
+    uri = '{}spatial/proj'.format(settings.earthdata_api_url)
+    projections_response = r.get(uri).json()
+
+    projections_df = pd.DataFrame(projections_response)
+
+    return projections_df.to_dict('records')
+
+
 @router.post("/query-task")
 def queue_new_task(task: TaskParams):
 
@@ -91,10 +101,38 @@ def queue_new_task(task: TaskParams):
 
     file_dir = os.path.join(src, static_dir, shape_files, filename)
 
-    nps = gpd.read_file(file_dir)
+    data = gpd.read_file(file_dir)
 
-    nps['DATE_EDIT'] = nps['DATE_EDIT'].dt.strftime('%Y-%m-%d')
-    nps = nps[[
+    data['DATE_EDIT'] = data['DATE_EDIT'].dt.strftime('%Y-%m-%d')
+    data = data[[
         'UNIT_CODE', 'UNIT_NAME', 'DATE_EDIT',
         'STATE', 'GNIS_ID', 'geometry'
     ]]
+
+    # filter selcted place
+    selected_unit = data[data['UNIT_NAME'].str.contains(task.place)]
+    unit = json.loads(selected_unit.to_json())
+
+    task_name = 'space-apps-geo-tool' + " " + selected_unit['UNIT_NAME'].values[0]
+    task_type = 'area'
+
+    # projection
+    proj = 'geographic'
+
+    outFormat = 'geotiff'
+
+    task = {
+        'task_type': task_type,
+        'task_name': task_name,
+        'params': {
+            'dates': [{'startDate': task.start_date, 'endDate': task.end_date}],
+            'layers': [{'product': task.product, 'layer': task.layer}],
+            'output': {
+                'format': {'type': outFormat},
+                'projection': proj
+            },
+            'geo': unit,
+        }
+    }
+
+    return task
