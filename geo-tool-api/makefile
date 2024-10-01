@@ -18,10 +18,10 @@ activate:
 
 install:
 	@echo "Installing dependencies..."
-	$(VENV_DIR)/bin/pip install -r requirements.txt
+	pip install -r requirements.txt
 	@echo "Dependencies installed."
 
-run:
+run-dev:
 	@echo "Running FastAPI app..."
 	fastapi dev main.py
 
