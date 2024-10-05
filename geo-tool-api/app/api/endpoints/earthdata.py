@@ -75,7 +75,7 @@ def get_places():
 
     nps = gpd.read_file(file_dir)
 
-    return list(nps['UNIT_NAME'])
+    return nps[['UNIT_CODE', 'UNIT_NAME']].to_dict('records')
 
 
 @router.get('/projections')
