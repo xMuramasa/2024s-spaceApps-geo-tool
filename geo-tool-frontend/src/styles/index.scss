@@ -1,0 +1,138 @@
+@import './variables.scss';
+@import './fonts.css';
+//---- Personalization Bootstrap ----//
+@import './form.scss';
+
+$theme-colors: (
+  'primary': $color-primary-1,
+  'secondary': $color-secondary-1,
+  'danger': $color-danger,
+  'success': $color-success,
+  'info': $color-primary-purple-300,
+);
+
+$link-color: $color-primary-2;
+
+@import '~bootstrap/scss/bootstrap';
+
+.btn-primary {
+  --bs-btn-color: white;
+  --bs-btn-hover-color: white;
+}
+
+.btn-primary:hover {
+  background-color: $color-danger;
+  border: 1px solid var(--is-danger-red, $color-danger);
+}
+
+.btn {
+  border-radius: 100px;
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: 8px;
+  background-color: #F4F3F2;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color: $color-primary-1;
+}
+
+//FIXME debería cambiarse el valor de la variable, en lugar del valor del atributo dentro de la clase
+.alert-warning {
+  --bs-alert-color: #664D02;
+  --bs-alert-bg: #fff3cd;
+  --bs-alert-border-color: #ffe69c;
+  --bs-alert-link-color: #664d03;
+}
+
+.alert-danger {
+  --bs-alert-color: #FFFFFF;
+  --bs-alert-bg: #FF3860;
+  --bs-alert-border-color: #FF3860;
+  --bs-alert-link-color: #FFFFFF;
+}
+
+.alert-success {
+  --bs-alert-color: #FFFFFF;
+  --bs-alert-bg: #48C774;
+  --bs-alert-border-color: #48C774;
+  --bs-alert-link-color: #FFFFFF;
+}
+
+//--- App Styles ----//
+
+body {
+  margin: 0;
+  font-family: Avenir Next, 'Avenir Next';
+  font-size: 16px;
+  color: $color-text;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: $font-family-avenir-bold;
+  color: $color-text;
+}
+
+a {
+  color: $color-secondary-1;
+  font-family: $font-family-avenir-bold;
+  text-decoration: none;
+}
+
+.back-button.btn.btn-link{
+  color: $color-secondary-1;
+}
+
+.form-container {
+  .form-title {
+    font-size: 1.6rem;
+    color: $color-text;
+  }
+  .form-control:focus {
+    background-color: #f0f0f0; 
+    border: 1px solid $color-primary-1;
+  }
+}
+
+.form-control::placeholder {
+  color: $color-tertiary-2;
+  font-weight: 400;
+  line-height: 140%; /* 22.4px */
+  letter-spacing: 0.2px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: #f0f0f0; 
+  border: 1px solid $color-primary-1;
+}
+
+.form-check-input:checked{
+  background-color: $color-primary-1; 
+  border: $color-primary-1;
+}
+
+.font-avenir-bold{
+  font-family: $font-family-avenir-bold;
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 576px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 768px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+}

@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useState } from 'react';
 import { fromUrl, fromArrayBuffer, fromBlob } from "geotiff";
 
@@ -12,12 +10,11 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet.gridlayer.googlemutant'
 
 import GeoRasterLayer from "georaster-layer-for-leaflet";
-import Script from 'next/script';
 const parseGeoraster = require("georaster");
 
 
 
-export const GeoFileViewer = () => {
+const GeoViewerComponent = () => {
   const [metadata, setMetadata] = useState(null);
 
   const [map, setMap] = useState(null);
@@ -136,11 +133,7 @@ export const GeoFileViewer = () => {
   }, [metadata])
 
   return (
-    <div className='grid grid-cols-1 gap-4 items-center justify-items-center'>
-
-      <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_MAPS_KEY}`} async defer
-      />
+    <div className='d-flex flex-column justify-content-center align-items-center'>
 
       <div id="map" style={{ width: '70%', height: '65vh' }} />
       <h1>GeoTIFF Viewer</h1>
@@ -153,16 +146,15 @@ export const GeoFileViewer = () => {
   )
 };
 
-export default GeoFileViewer;
 
 function viridisColor(value) {
   // Ensure the value is clamped between 0 and 255
-
+  
   value = Math.max(0, Math.min(255, value));
-
+  
   // Normalize the value to a range of 0 to 1
   const normalizedValue = value / 255;
-
+  
   // Viridis color scale
   const viridis = [
     [68, 1, 84],    // Dark purple
@@ -176,25 +168,26 @@ function viridisColor(value) {
     [254, 153, 7],
     [255, 255, 255] // White (optional, for values above 255)
   ];
-
+  
   // Calculate the index for the color
   const n = viridis.length - 1;
   const idx = Math.floor(normalizedValue * n);
   const ratio = (normalizedValue * n) - idx;
-
+  
   // Interpolate between colors
   const color1 = viridis[idx];
   const color2 = viridis[Math.min(idx + 1, n)];
   const r = Math.round(color1[0] + ratio * (color2[0] - color1[0]));
   const g = Math.round(color1[1] + ratio * (color2[1] - color1[1]));
   const b = Math.round(color1[2] + ratio * (color2[2] - color1[2]));
-
+  
   // Convert to hex
   const color = `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).padStart(6, '0')}`;
-
+  
   if (value >= 255) {
     return 'rgba(0, 0, 0, 0)'; // Transparent
   } else {
     return color;
   }
 }
+export default GeoViewerComponent;
