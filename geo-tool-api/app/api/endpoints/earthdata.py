@@ -19,6 +19,24 @@ def login():
         settings.earthdata_username, settings.earthdata_password))
     return token_response.json()
 
+def get_product_id(query_string, platform):
+    uri_1 = '{}product'.format(settings.earthdata_api_url)
+    prods = r.get(uri_1).json()
+    products_dataframe = pd.DataFrame(prods)
+
+    filtered_products = products_dataframe[
+    (products_dataframe['Description'] == query_string) & 
+    (products_dataframe['TemporalExtentEnd'] == 'Present') &
+    (products_dataframe['Platform'] == platform)
+    ]
+    
+    oldest_date_product = filtered_products[
+    filtered_products['TemporalExtentStart'] == filtered_products['TemporalExtentStart'].min()
+    ]
+    oldest_date_product_id = oldest_date_product['ProductAndVersion']
+    uri_2 = '{}product/{}'.format(settings.earthdata_api_url,
+                                  oldest_date_product_id) 
+    return uri_2
 
 # Define a route to get user info
 @router.get("/product-descriptions")
@@ -27,6 +45,7 @@ def get_product_descriptions():
     prods = r.get(uri).json()
     prods_df = pd.DataFrame(prods)
     return prods_df[['ProductAndVersion', 'Description']].to_dict('records')
+
 
 
 @router.post("/search-products")
