@@ -25,8 +25,8 @@ def login():
 def get_product_descriptions():
     uri = '{}product'.format(settings.earthdata_api_url)
     prods = r.get(uri).json()
-    desc_list = [p['Description'] for p in prods]
-    return desc_list
+    prods_df = pd.DataFrame(prods)
+    return prods_df[['ProductAndVersion', 'Description']].to_dict('records')
 
 
 @router.post("/search-products")
@@ -44,10 +44,10 @@ def search_products(search: SearchParams):
     return list(result['ProductAndVersion'])
 
 
-@router.post("/get-layers")
-def get_layers(product: SearchParams):
-    uri = '{}product/{}'.format(settings.earthdata_api_url,
-                                product.query_string)
+@router.get("/get-layers/")
+def get_layers(productId: str):
+
+    uri = '{}product/{}'.format(settings.earthdata_api_url, productId)
     layers_response = r.get(uri).json()
 
     layers = []
@@ -113,7 +113,8 @@ def queue_new_task(task: TaskParams):
     selected_unit = data[data['UNIT_NAME'].str.contains(task.place)]
     unit = json.loads(selected_unit.to_json())
 
-    task_name = 'space-apps-geo-tool' + " " + selected_unit['UNIT_NAME'].values[0]
+    task_name = 'space-apps-geo-tool' + " " + \
+        selected_unit['UNIT_NAME'].values[0]
     task_type = 'area'
 
     # projection
