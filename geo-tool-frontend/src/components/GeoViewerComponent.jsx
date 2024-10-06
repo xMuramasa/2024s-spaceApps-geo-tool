@@ -14,8 +14,6 @@ import GeoRasterLayer from "georaster-layer-for-leaflet";
 // import { SimpleMapScreenshoter } from 'leaflet-simple-map-screenshoter';
 import 'leaflet-simple-map-screenshoter'
 
-import Button from 'react-bootstrap/Button';
-import { CloudArrowDownFill } from 'react-bootstrap-icons';
 
 import './components.scss';
 import { requestCaption } from '../api/api';
@@ -122,7 +120,7 @@ const GeoViewerComponent = ({ selectedPlace, loading }) => {
 
 
     }
-  }, [customMap]);
+  }, [customMap, selectedPlace]);
 
   const handleSnap = () => {
     if (customMap && snapshot) {
@@ -139,6 +137,9 @@ const GeoViewerComponent = ({ selectedPlace, loading }) => {
           var blob = new Blob([arrayBuffer], { type: mimeString });
 
           const r = await requestCaption(blob);
+          if(r) {
+            alert(JSON.stringify(r))
+          }
           // FileSaver.saveAs(blob, 'screen.png')
         }).catch(e => {
           console.error(e)
@@ -152,12 +153,12 @@ const GeoViewerComponent = ({ selectedPlace, loading }) => {
 
   return (
     <div className='geo-viewer-container'>
-      <Button
+      {/* <Button
         variant='outline-primary'
         className='m-1'
         onClick={handleSnap}>
         Consultar Mapa
-      </Button>
+      </Button> */}
       <div id="map" className='custom-map' />
     </div >
   )
