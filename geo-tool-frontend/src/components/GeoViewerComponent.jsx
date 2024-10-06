@@ -135,7 +135,7 @@ const GeoViewerComponent = () => {
   return (
     <div className='d-flex flex-column justify-content-center align-items-center'>
 
-      <div id="map" style={{ width: '70%', height: '65vh' }} />
+      <div id="map" style={{ width: '100%', height: '65vh' }} />
       <h1>GeoTIFF Viewer</h1>
       <div>
         {metadata && JSON.stringify(metadata)}

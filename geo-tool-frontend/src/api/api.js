@@ -1,8 +1,6 @@
 // api.js
 export const fetchData = async (endpoint) => {
     const uri = `${process.env.REACT_APP_API_URL}/${endpoint}`;
-
-    console.log('uri', uri)
     try {
       const response = await fetch(uri);
   
