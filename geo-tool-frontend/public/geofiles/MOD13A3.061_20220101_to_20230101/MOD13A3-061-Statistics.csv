@@ -1,0 +1,14 @@
+File Name,Dataset,aid,Date,Count,Minimum,Maximum,Range,Mean,Standard Deviation,Variance,Upper Quartile,Upper 1.5 IQR,Median,Lower 1.5 IQR,Lower Quartile
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022001_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-01-01,14885,63.04,72.46,"(63.04,72.46)",66.9985086,2.3253635,5.4073154,68.93,72.46,66.8,63.04,65.53
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022032_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-02-01,14885,52.7,69.97,"(52.7,69.97)",62.2676164,4.4945007,20.2005363,65.79,69.97,63.41,52.7,58.88
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022060_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-03-01,14885,39.85,60.74,"(39.85,60.74)",49.898737,5.2194749,27.2429187,53.42,60.74,50.3,39.85,46.96
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022091_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-04-01,14885,29.13,48.7,"(29.13,48.7)",40.4958018,4.8080525,23.117369,43.72,48.7,40.73,29.13,35.84
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022121_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-05-01,14885,23.05,37.62,"(23.05,37.62)",28.5822224,3.6938218,13.6443192,31.78,37.62,28.21,23.05,25.52
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022152_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-06-01,14885,21.63,33.58,"(21.63,33.58)",28.0700517,2.978233,8.869872,30.47,33.58,30.09,21.63,25.56
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022182_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-07-01,14875,21.83,38.82,"(21.83,38.82)",27.8609822,0.9904094,0.9809107,27.95,28.62,27.75,26.8,27.49
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022213_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-08-01,14861,26.67,43.73,"(26.67,43.73)",34.935616,1.3296186,1.7678857,35.61,38.01,34.54,31.83,34.0
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022244_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-09-01,14848,38.35,56.21,"(38.35,56.21)",45.6385985,1.6969996,2.8798075,46.37,49.26,44.93,41.78,44.44
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022274_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-10-01,14766,49.08,60.61,"(49.08,60.61)",51.6906231,1.3146235,1.728235,51.99,52.84,51.76,50.57,51.42
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022305_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-11-01,14884,59.88,70.3,"(59.88,70.3)",64.5007834,2.4679441,6.0907481,66.93,70.3,63.34,59.88,62.43
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2022335_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2022-12-01,14885,63.34,73.43,"(63.34,73.43)",67.6872301,2.4102226,5.8091731,69.46,73.43,67.86,63.34,65.74
+MOD13A3_061__1_km_monthly_sun_zenith_angle_doy2023001_aid0001,_1_km_monthly_sun_zenith_angle,aid0001,2023-01-01,14885,62.45,73.57,"(62.45,73.57)",68.904737,2.8399456,8.0652911,71.37,73.57,70.16,62.45,66.27

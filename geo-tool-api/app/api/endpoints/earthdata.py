@@ -3,6 +3,7 @@ import requests as r
 from fastapi import APIRouter, HTTPException
 
 from app.core.config import settings
+from datetime import datetime
 
 from app.models.models import SearchParams, TaskParams
 
@@ -13,11 +14,13 @@ import os
 router = APIRouter()
 
 
-def login():
-    uri = '{}login'.format(settings.earthdata_api_url)
-    token_response = r.post(uri, auth=(
-        settings.earthdata_username, settings.earthdata_password))
-    return token_response.json()
+@router.get("/product-descriptions")
+def get_product_descriptions():
+    uri = '{}product'.format(settings.earthdata_api_url)
+    prods = r.get(uri).json()
+    prods_df = pd.DataFrame(prods).drop_duplicates(subset=['Description'])
+    return prods_df[['ProductAndVersion', 'Description']].to_dict('records')
+
 
 def get_product_id(query_string):
     uri_1 = '{}product'.format(settings.earthdata_api_url)
@@ -25,61 +28,52 @@ def get_product_id(query_string):
     products_dataframe = pd.DataFrame(prods)
 
     filtered_products = products_dataframe[
-    (products_dataframe['Description'] == query_string) & 
-    (products_dataframe['TemporalExtentEnd'] == 'Present')
+        (products_dataframe['Description'] == query_string) &
+        (products_dataframe['TemporalExtentEnd'] == 'Present')
     ]
-    
+
     oldest_date_product = filtered_products[
-    filtered_products['TemporalExtentStart'] == filtered_products['TemporalExtentStart'].min()
-    ]
-    clean_dict = oldest_date_product[['ProductAndVersion','Platform']].to_dict('records')[0]
-    
-    return clean_dict
-
-def get_platform(p):
-    palforms = ['SRTM', 'ECOSTRESS', 'SSEBop ET', 'GPW', 'ASTER GDEM', 'NASADEM', 'MEaSUREs LSTE', 'EMIT']
-    return p if p in palforms else None
-
-# Define a route to get user info
-@router.get("/product-descriptions")
-def get_product_descriptions():
-    uri = '{}product'.format(settings.earthdata_api_url)
-    prods = r.get(uri).json()
-    prods_df = pd.DataFrame(prods)
-    return prods_df[['ProductAndVersion', 'Description']].to_dict('records')
-
-
-
-@router.post("/search-products")
-def search_products(search: SearchParams):
-    uri = '{}product'.format(settings.earthdata_api_url)
-    prods = r.get(uri).json()
-
-    products_dataframe = pd.DataFrame(prods)
-
-    result = products_dataframe[
-        (products_dataframe['Available'] is True) & (products_dataframe['Deleted'] is False) &
-        products_dataframe['Description'].str.contains(search.query_string)
+        filtered_products['TemporalExtentStart'] == filtered_products['TemporalExtentStart'].min()
     ]
 
-    return list(result['ProductAndVersion'])
+    platforms = ['SRTM', 'ECOSTRESS', 'SSEBop ET', 'GPW',
+                 'ASTER GDEM', 'NASADEM', 'MEaSUREs LSTE', 'EMIT']
+
+    oldest_date_product['Platform'] = oldest_date_product['Platform'].apply(
+        lambda p: p if p in platforms else None
+    )
+
+    clean_dict = oldest_date_product[['TemporalExtentStart',
+                                      'ProductAndVersion',
+                                      'Platform']].to_dict('records')
+
+    return clean_dict[0] if len(clean_dict) > 0 else None
 
 
-@router.get("/get-layers/")
-def get_layers(productId: str):
+@router.post("/get-layers/")
+def get_layers(s: SearchParams):
 
-    uri = '{}product/{}'.format(settings.earthdata_api_url, productId)
-    layers_response = r.get(uri).json()
+    found = get_product_id(s.query_string)
+    print('found', found)
 
-    layers = []
+    if found:
+        uri = '{}product/{}'.format(settings.earthdata_api_url,
+                                    found['ProductAndVersion'])
+        layers_response = r.get(uri).json()
 
-    for name, info_values in layers_response.items():
-        layers.append({
-            "id": name,
-            "description": info_values['Description']
-        })
+        layers = []
 
-    return layers
+        for name, info_values in layers_response.items():
+            layers.append({
+                "id": name,
+                "description": info_values['Description'],
+                "minDate": found['TemporalExtentStart']
+            })
+
+        return layers
+
+    else:
+        return None
 
 
 @router.get('/places')
@@ -109,7 +103,7 @@ def get_projections():
     return projections_df.to_dict('records')
 
 
-@router.post("/query-task")
+@router.post("/queue-task")
 def queue_new_task(task: TaskParams):
 
     src = './'
@@ -130,12 +124,15 @@ def queue_new_task(task: TaskParams):
         'STATE', 'GNIS_ID', 'geometry'
     ]]
 
+    print(task.start_date, task.end_date, task.layer, task.product, task.place)
+
     # filter selcted place
-    selected_unit = data[data['UNIT_NAME'].str.contains(task.place)]
+    selected_unit = data[data['UNIT_CODE'] == (task.place)]
     unit = json.loads(selected_unit.to_json())
 
-    task_name = 'space-apps-geo-tool' + " " + \
-        selected_unit['UNIT_NAME'].values[0]
+    task_name = ('space-apps-geo-tool'
+                 + " "
+                 + selected_unit['UNIT_NAME'].values[0]).replace(' ', '_')
     task_type = 'area'
 
     # projection
@@ -143,14 +140,30 @@ def queue_new_task(task: TaskParams):
 
     outFormat = 'geotiff'
 
+    start_date_object = datetime.fromisoformat(
+        task.start_date.rstrip("Z") + "+00:00")
+    formatted_start_date = start_date_object.strftime("%m-%d-%Y")
+
+    end_date_object = datetime.fromisoformat(
+        task.end_date.rstrip("Z") + "+00:00")
+    formatted_end_date = end_date_object.strftime("%m-%d-%Y")
+
     task = {
         'task_type': task_type,
         'task_name': task_name,
         'params': {
-            'dates': [{'startDate': task.start_date, 'endDate': task.end_date}],
-            'layers': [{'product': task.product, 'layer': task.layer}],
+            'dates': [{
+                'startDate': formatted_start_date,
+                'endDate': formatted_end_date
+            }],
+            'layers': [{
+                'product': task.product.id,
+                'layer': task.layer
+            }],
             'output': {
-                'format': {'type': outFormat},
+                'format': {
+                    'type': outFormat
+                },
                 'projection': proj
             },
             'geo': unit,

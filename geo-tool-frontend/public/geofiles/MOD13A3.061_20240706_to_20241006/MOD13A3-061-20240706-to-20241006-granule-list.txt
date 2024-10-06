@@ -1,0 +1,2 @@
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2024183.h10v04.061.2024228023726/MOD13A3.A2024183.h10v04.061.2024228023726.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2024214.h10v04.061.2024267145613/MOD13A3.A2024214.h10v04.061.2024267145613.hdf

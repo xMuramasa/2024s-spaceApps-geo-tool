@@ -1,0 +1,13 @@
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022001.h10v04.061.2022035130549/MOD13A3.A2022001.h10v04.061.2022035130549.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022032.h10v04.061.2022066005111/MOD13A3.A2022032.h10v04.061.2022066005111.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022060.h10v04.061.2022108194116/MOD13A3.A2022060.h10v04.061.2022108194116.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022091.h10v04.061.2022136110634/MOD13A3.A2022091.h10v04.061.2022136110634.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022121.h10v04.061.2022168104237/MOD13A3.A2022121.h10v04.061.2022168104237.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022152.h10v04.061.2022201123457/MOD13A3.A2022152.h10v04.061.2022201123457.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022182.h10v04.061.2022232151333/MOD13A3.A2022182.h10v04.061.2022232151333.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022213.h10v04.061.2022258141341/MOD13A3.A2022213.h10v04.061.2022258141341.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022244.h10v04.061.2022297165415/MOD13A3.A2022244.h10v04.061.2022297165415.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022274.h10v04.061.2022307132015/MOD13A3.A2022274.h10v04.061.2022307132015.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022305.h10v04.061.2022351005241/MOD13A3.A2022305.h10v04.061.2022351005241.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2022335.h10v04.061.2023006050604/MOD13A3.A2022335.h10v04.061.2023006050604.hdf
+https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MOD13A3.061/MOD13A3.A2023001.h10v04.061.2023034180333/MOD13A3.A2023001.h10v04.061.2023034180333.hdf
