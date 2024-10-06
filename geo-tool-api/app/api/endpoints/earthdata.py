@@ -38,6 +38,10 @@ def get_product_id(query_string, platform):
                                   oldest_date_product_id) 
     return uri_2
 
+def get_platform(p):
+    palforms = ['SRTM', 'ECOSTRESS', 'SSEBop ET', 'GPW', 'ASTER GDEM', 'NASADEM', 'MEaSUREs LSTE', 'EMIT']
+    return p if p in palforms else None
+
 # Define a route to get user info
 @router.get("/product-descriptions")
 def get_product_descriptions():
