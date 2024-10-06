@@ -83,7 +83,6 @@ In this directory you can the backend api, you need a `.env` file with the follo
 * `EARTHDATA_USERNAME`
 * `EARTHDATA_PASSWORD`
 * `EARTHDATA_API_URL`
-* `HUGGING_FACE_TOKEN`
 * `OPEN_API_KEY`
 
 There is a makefile to run the backend locally with the following commands:
