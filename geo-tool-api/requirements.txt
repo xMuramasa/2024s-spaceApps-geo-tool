@@ -47,3 +47,9 @@ uvicorn==0.31.0
 uvloop==0.20.0
 watchfiles==0.24.0
 websockets==13.1
+huggingface_hub==0.25.1
+transformers==4.45.1
+torch
+Pillow
+prophet
+openai

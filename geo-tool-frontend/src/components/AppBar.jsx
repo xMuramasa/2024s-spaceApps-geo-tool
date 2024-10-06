@@ -28,7 +28,7 @@ export default function RRAppBar(props) {
             </IconButton>
 
             <Typography variant="h4" component="div" m={2}>
-              Geo-Tool
+              Geo Adverse
             </Typography>
           </Toolbar>
         </AppBar>

@@ -1,0 +1,35 @@
+Value,MODLAND,VI Usefulness,Aerosol Quantity,Adjacent cloud detected,Atmosphere BRDF Correction,Mixed Clouds,Land/Water Mask,Possible snow/ice,Possible shadow
+2112,"VI produced, good quality",Highest quality,Low,No,No,No,Land (Nothing else but land),No,No
+2116,"VI produced, good quality",Lower quality,Low,No,No,No,Land (Nothing else but land),No,No
+2181,"VI produced, but check other QA",Lower quality,Average,No,No,No,Land (Nothing else but land),No,No
+2185,"VI produced, but check other QA",Decreasing quality (0010),Average,No,No,No,Land (Nothing else but land),No,No
+2257,"VI produced, but check other QA",Decreasing quality (0100),High,No,No,No,Land (Nothing else but land),No,No
+2372,"VI produced, good quality",Lower quality,Low,Yes,No,No,Land (Nothing else but land),No,No
+4160,"VI produced, good quality",Highest quality,Low,No,No,No,Ocean coastlines and lake shorelines,No,No
+4164,"VI produced, good quality",Lower quality,Low,No,No,No,Ocean coastlines and lake shorelines,No,No
+6153,"VI produced, but check other QA",Decreasing quality (0010),Climatology,No,No,No,Shallow inland water,No,No
+6154,"Pixel produced, but most probably cloudy",Decreasing quality (0010),Climatology,No,No,No,Shallow inland water,No,No
+6158,"Pixel produced, but most probably cloudy",Decreasing quality (0011),Climatology,No,No,No,Shallow inland water,No,No
+6208,"VI produced, good quality",Highest quality,Low,No,No,No,Shallow inland water,No,No
+6212,"VI produced, good quality",Lower quality,Low,No,No,No,Shallow inland water,No,No
+6277,"VI produced, but check other QA",Lower quality,Average,No,No,No,Shallow inland water,No,No
+6349,"VI produced, but check other QA",Decreasing quality (0011),High,No,No,No,Shallow inland water,No,No
+6353,"VI produced, but check other QA",Decreasing quality (0100),High,No,No,No,Shallow inland water,No,No
+6413,"VI produced, but check other QA",Decreasing quality (0011),Climatology,Yes,No,No,Shallow inland water,No,No
+6417,"VI produced, but check other QA",Decreasing quality (0100),Climatology,Yes,No,No,Shallow inland water,No,No
+6609,"VI produced, but check other QA",Decreasing quality (0100),High,Yes,No,No,Shallow inland water,No,No
+6613,"VI produced, but check other QA",Decreasing quality (0101),High,Yes,No,No,Shallow inland water,No,No
+7190,"Pixel produced, but most probably cloudy",Decreasing quality (0101),Climatology,No,No,Yes,Shallow inland water,No,No
+7194,"Pixel produced, but most probably cloudy",Decreasing quality (0110),Climatology,No,No,Yes,Shallow inland water,No,No
+7246,"Pixel produced, but most probably cloudy",Decreasing quality (0011),Low,No,No,Yes,Shallow inland water,No,No
+35148,"VI produced, good quality",Decreasing quality (0011),Low,Yes,No,No,Land (Nothing else but land),No,Yes
+38984,"VI produced, good quality",Decreasing quality (0010),Low,No,No,No,Shallow inland water,No,Yes
+38988,"VI produced, good quality",Decreasing quality (0011),Low,No,No,No,Shallow inland water,No,Yes
+39053,"VI produced, but check other QA",Decreasing quality (0011),Average,No,No,No,Shallow inland water,No,Yes
+39125,"VI produced, but check other QA",Decreasing quality (0101),High,No,No,No,Shallow inland water,No,Yes
+39129,"VI produced, but check other QA",Decreasing quality (0110),High,No,No,No,Shallow inland water,No,Yes
+39189,"VI produced, but check other QA",Decreasing quality (0101),Climatology,Yes,No,No,Shallow inland water,No,Yes
+39193,"VI produced, but check other QA",Decreasing quality (0110),Climatology,Yes,No,No,Shallow inland water,No,Yes
+39385,"VI produced, but check other QA",Decreasing quality (0110),High,Yes,No,No,Shallow inland water,No,Yes
+39389,"VI produced, but check other QA",Decreasing quality (0111),High,Yes,No,No,Shallow inland water,No,Yes
+57343,Pixel not produced due to other reasons than clouds,Not useful for any other reason/not processed,High,Yes,Yes,Yes,Shallow inland water,Yes,Yes

@@ -9,6 +9,4 @@ services:
       - "8000:8000"
     extra_hosts:
     - "host.docker.internal:host-gateway"
-    volumes:
-    - "./reports/test_cases:/app/reports/test_cases"
     restart: always

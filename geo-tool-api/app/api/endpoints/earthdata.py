@@ -3,6 +3,7 @@ import requests as r
 from fastapi import APIRouter, HTTPException
 
 from app.core.config import settings
+from datetime import datetime
 
 from app.models.models import SearchParams, TaskParams
 
@@ -56,7 +57,8 @@ def get_layers(s: SearchParams):
     print('found', found)
 
     if found:
-        uri = '{}product/{}'.format(settings.earthdata_api_url, found['ProductAndVersion'])
+        uri = '{}product/{}'.format(settings.earthdata_api_url,
+                                    found['ProductAndVersion'])
         layers_response = r.get(uri).json()
 
         layers = []
@@ -101,7 +103,7 @@ def get_projections():
     return projections_df.to_dict('records')
 
 
-@router.post("/query-task")
+@router.post("/queue-task")
 def queue_new_task(task: TaskParams):
 
     src = './'
@@ -122,12 +124,15 @@ def queue_new_task(task: TaskParams):
         'STATE', 'GNIS_ID', 'geometry'
     ]]
 
+    print(task.start_date, task.end_date, task.layer, task.product, task.place)
+
     # filter selcted place
-    selected_unit = data[data['UNIT_NAME'].str.contains(task.place)]
+    selected_unit = data[data['UNIT_CODE'] == (task.place)]
     unit = json.loads(selected_unit.to_json())
 
-    task_name = 'space-apps-geo-tool' + " " + \
-        selected_unit['UNIT_NAME'].values[0]
+    task_name = ('space-apps-geo-tool'
+                 + " "
+                 + selected_unit['UNIT_NAME'].values[0]).replace(' ', '_')
     task_type = 'area'
 
     # projection
@@ -135,14 +140,30 @@ def queue_new_task(task: TaskParams):
 
     outFormat = 'geotiff'
 
+    start_date_object = datetime.fromisoformat(
+        task.start_date.rstrip("Z") + "+00:00")
+    formatted_start_date = start_date_object.strftime("%m-%d-%Y")
+
+    end_date_object = datetime.fromisoformat(
+        task.end_date.rstrip("Z") + "+00:00")
+    formatted_end_date = end_date_object.strftime("%m-%d-%Y")
+
     task = {
         'task_type': task_type,
         'task_name': task_name,
         'params': {
-            'dates': [{'startDate': task.start_date, 'endDate': task.end_date}],
-            'layers': [{'product': task.product, 'layer': task.layer}],
+            'dates': [{
+                'startDate': formatted_start_date,
+                'endDate': formatted_end_date
+            }],
+            'layers': [{
+                'product': task.product.id,
+                'layer': task.layer
+            }],
             'output': {
-                'format': {'type': outFormat},
+                'format': {
+                    'type': outFormat
+                },
                 'projection': proj
             },
             'geo': unit,
