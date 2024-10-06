@@ -1,12 +1,6 @@
 @import './variables.scss';
 
-html,
-body {
-  background-color: $color-background-1;
-}
-
 .page {
-  background-color: $color-background-1;
 
   .page-container {
     max-width: 1080px;
@@ -168,11 +162,12 @@ body {
 
 .top-bar-container {
   margin: 1rem 0;
-  padding: 0.5rem;
+  padding: 1rem;
 
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 5px;
+  grid-template-columns: repeat(5, auto);
+
+  align-items: center;
 
   width: 100%;
 
@@ -191,6 +186,7 @@ body {
   @media screen and (min-width: 768px) {
     display: grid;
     grid-template-columns: 70% auto;
+    gap: 2rem;
     align-items: center;
   }
   
@@ -206,3 +202,4 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 }
+

@@ -13,11 +13,12 @@ import os
 router = APIRouter()
 
 
-def login():
-    uri = '{}login'.format(settings.earthdata_api_url)
-    token_response = r.post(uri, auth=(
-        settings.earthdata_username, settings.earthdata_password))
-    return token_response.json()
+@router.get("/product-descriptions")
+def get_product_descriptions():
+    uri = '{}product'.format(settings.earthdata_api_url)
+    prods = r.get(uri).json()
+    prods_df = pd.DataFrame(prods).drop_duplicates(subset=['Description'])
+    return prods_df[['ProductAndVersion', 'Description']].to_dict('records')
 
 
 def get_product_id(query_string):
@@ -33,56 +34,44 @@ def get_product_id(query_string):
     oldest_date_product = filtered_products[
         filtered_products['TemporalExtentStart'] == filtered_products['TemporalExtentStart'].min()
     ]
-    clean_dict = oldest_date_product[['ProductAndVersion', 'Platform']].to_dict('records')[
-        0]
 
-    return clean_dict
+    platforms = ['SRTM', 'ECOSTRESS', 'SSEBop ET', 'GPW',
+                 'ASTER GDEM', 'NASADEM', 'MEaSUREs LSTE', 'EMIT']
 
+    oldest_date_product['Platform'] = oldest_date_product['Platform'].apply(
+        lambda p: p if p in platforms else None
+    )
 
-def get_platform(p):
-    palforms = ['SRTM', 'ECOSTRESS', 'SSEBop ET', 'GPW',
-                'ASTER GDEM', 'NASADEM', 'MEaSUREs LSTE', 'EMIT']
-    return p if p in palforms else None
+    clean_dict = oldest_date_product[['TemporalExtentStart',
+                                      'ProductAndVersion',
+                                      'Platform']].to_dict('records')
 
-
-@router.get("/product-descriptions")
-def get_product_descriptions():
-    uri = '{}product'.format(settings.earthdata_api_url)
-    prods = r.get(uri).json()
-    prods_df = pd.DataFrame(prods)
-    return prods_df[['ProductAndVersion', 'Description']].to_dict('records')
+    return clean_dict[0] if len(clean_dict) > 0 else None
 
 
-@router.post("/search-products")
-def search_products(search: SearchParams):
-    uri = '{}product'.format(settings.earthdata_api_url)
-    prods = r.get(uri).json()
+@router.post("/get-layers/")
+def get_layers(s: SearchParams):
 
-    products_dataframe = pd.DataFrame(prods)
+    found = get_product_id(s.query_string)
+    print('found', found)
 
-    result = products_dataframe[
-        (products_dataframe['Available'] is True) & (products_dataframe['Deleted'] is False) &
-        products_dataframe['Description'].str.contains(search.query_string)
-    ]
+    if found:
+        uri = '{}product/{}'.format(settings.earthdata_api_url, found['ProductAndVersion'])
+        layers_response = r.get(uri).json()
 
-    return list(result['ProductAndVersion'])
+        layers = []
 
+        for name, info_values in layers_response.items():
+            layers.append({
+                "id": name,
+                "description": info_values['Description'],
+                "minDate": found['TemporalExtentStart']
+            })
 
-@router.get("/get-layers/")
-def get_layers(productId: str):
+        return layers
 
-    uri = '{}product/{}'.format(settings.earthdata_api_url, productId)
-    layers_response = r.get(uri).json()
-
-    layers = []
-
-    for name, info_values in layers_response.items():
-        layers.append({
-            "id": name,
-            "description": info_values['Description']
-        })
-
-    return layers
+    else:
+        return None
 
 
 @router.get('/places')
