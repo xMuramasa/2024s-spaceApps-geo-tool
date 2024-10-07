@@ -16,7 +16,7 @@
 </div>
 
 # Roadmap
-  [Project Guidelines](https://docs.google.com/document/d/1a-rDKZboWiFkpIl8g3wewjC4FUXtSlUnzic_YRSvRKk/edit?usp=sharing)
+  [Project Guidelines]([https://docs.google.com/document/d/1a-rDKZboWiFkpIl8g3wewjC4FUXtSlUnzic_YRSvRKk/edit?usp=sharing](https://docs.google.com/document/d/1d5WlMk0iZZ6bW0AmiYWmWMBkInsUuBJ-KHv2FD8bf6s/edit))
   * ES: “GEO ADVERSE”  SISTEMA DE GESTIÓN AGRÍCOLA EN ZONAS CON CONDICIONES ADVERSAS.
   * EN: “GEO ADVERSE” AGRICULTURAL MANAGEMENT SYSTEM IN AREAS WITH ADVERSE CONDITIONS.
 
