@@ -8,23 +8,17 @@
   </b>
   </h1>
 
-  <p align="center">Hostile environment agricultural companion</p>
+  <p align="center">AGRICULTURAL MANAGEMENT SYSTEM IN AREAS WITH ADVERSE CONDITIONS.</p>
 </div>
 
 <div style="display: flex; justify-content: center;">
 <img src="./assets/geoAdverse.png" alt="landing" width="500"></img>
 </div>
 
-## Built With
-
-* [Node.js](https://nodejs.org/en/)
-* [React.js](https://reactjs.org/)
-* [MUI v5](https://mui.com/)
-* [React-Bootstrap](https://react-bootstrap.netlify.app/)
-* [Fastapi](https://fastapi.tiangolo.com)
-
 # Roadmap
   [Project Guidelines](https://docs.google.com/document/d/1a-rDKZboWiFkpIl8g3wewjC4FUXtSlUnzic_YRSvRKk/edit?usp=sharing)
+  * ES: “GEO ADVERSE”  SISTEMA DE GESTIÓN AGRÍCOLA EN ZONAS CON CONDICIONES ADVERSAS.
+  * EN: “GEO ADVERSE” AGRICULTURAL MANAGEMENT SYSTEM IN AREAS WITH ADVERSE CONDITIONS.
 
 - [x] General sections of the web interface
 - [x] Add results and visualizations
@@ -36,7 +30,13 @@
     - [x] Spanish
     - [ ] English
 
+## Built With
 
+* [Node.js](https://nodejs.org/en/)
+* [React.js](https://reactjs.org/)
+* [MUI v5](https://mui.com/)
+* [React-Bootstrap](https://react-bootstrap.netlify.app/)
+* [Fastapi](https://fastapi.tiangolo.com)
 
 ----
 
