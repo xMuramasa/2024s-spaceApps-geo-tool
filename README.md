@@ -9,6 +9,7 @@
   </h1>
 
   <p align="center">Hostile environment agricultural companion</p>
+  [Project Guidelines](https://docs.google.com/document/d/1a-rDKZboWiFkpIl8g3wewjC4FUXtSlUnzic_YRSvRKk/edit?usp=sharing)
 
 </div>
 
