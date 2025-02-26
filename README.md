@@ -11,8 +11,8 @@
   <p align="center">AGRICULTURAL MANAGEMENT SYSTEM IN AREAS WITH ADVERSE CONDITIONS.</p>
 </div>
 
-<div style="display: flex; justify-content: center;">
-<img src="./assets/geoAdverse.png" alt="landing" width="500"></img>
+<div align="center">
+<img src="./assets/geoAdverse.png" alt="landing" width="1000"></img>
 </div>
 
 # Roadmap
